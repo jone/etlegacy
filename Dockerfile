@@ -20,14 +20,14 @@ RUN curl https://www.etlegacy.com/download/file/87 | tar xvz; mv etlegacy-v2.75-
 RUN curl -o temp.exe http://trackbase.eu/files//et/full/WolfET_2_60b_custom.exe; 7z e temp.exe -oetlegacy/etmain etmain/pak*.pk3; rm temp.exe
 RUN echo "set sv_allowDownload \"1\"" >> etlegacy/etmain/etl_server.cfg
 RUN echo "set rconpassword \"etlegacy\"" >> etlegacy/etmain/etl_server.cfg
-RUN echo "set sv_pure \"0\"" >> etlegacy/etmain/etl_server.cfg
-RUN echo "set sv_cheats \"1\"" >> etlegacy/etmain/etl_server.cfg
 
 # Port to expose
 EXPOSE 27960/udp
 
 # Set the user to run etlegacy as daemon
 USER root
+
+COPY etlded_bot.sh etlegacy/etlded_bot.sh
 
 # Set the entrypoint to etlegacy script
 WORKDIR /etlegacy
